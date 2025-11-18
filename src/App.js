@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { getPopularMovies } from "./api";
+import "./App.css";
 
 function App() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      const results = await getPopularMovies();
+      setMovies(results);
+    }
+    fetchMovies();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Popular Movies</h1>
+
+      <div className="movie-grid">
+        {movies.map((movie) => (
+          <div className="movie-card" key={movie.id}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h3>{movie.title}</h3>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
