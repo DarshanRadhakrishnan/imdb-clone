@@ -1,5 +1,6 @@
 import FavoriteButton from "./FavoriteButton";
 
+
 const MovieCard = ({ movie }) => {
   return (
     <div className="relative p-4 bg-white rounded-xl shadow hover:shadow-lg transition">
