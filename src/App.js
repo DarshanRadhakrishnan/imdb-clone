@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthProvider, AuthContext } from "./AuthContext";
+import Navbar from "./Navbar";
+import ProtectedRoute from "./ProtectedRoute";
 
-function App() {
+function AppContent() {
+  const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState(() => {
     return JSON.parse(localStorage.getItem("tasks")) || [];
   });
@@ -84,6 +88,19 @@ function App() {
         ))}
       </ul>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <ProtectedRoute>
+        <div>
+          <Navbar />
+          <AppContent />
+        </div>
+      </ProtectedRoute>
+    </AuthProvider>
   );
 }
 

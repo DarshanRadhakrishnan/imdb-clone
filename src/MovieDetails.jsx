@@ -13,7 +13,7 @@ import {
   Stack,
   Center,
 } from "@chakra-ui/react";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader1";
 
 const MovieDetails = () => {
   const { movieId } = useParams(); // 🔥 movie id from URL
